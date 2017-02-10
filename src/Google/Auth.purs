@@ -40,7 +40,17 @@ foreign import data LoadedGapi :: *
 foreign import data GoogleAuth :: *
 foreign import data GoogleUser :: *
 foreign import data GoogleBasicProfile :: *
+type GoogleAuthResponse =
+  { access_token :: String
+  , id_token :: IdToken
+  , login_hint :: String
+  , scope :: String
+  , expires_in :: String
+  , first_issued_at :: String
+  , expires_at :: String
+  }
 newtype ClientId = ClientId String
+newtype IdToken = IdToken String
 
 foreign import loadAuth2Impl :: forall e.
   Gapi
@@ -54,6 +64,7 @@ foreign import init :: forall e.
 foreign import signInImpl :: forall e. GoogleAuth -> Eff (dom :: DOM, ajax :: AJAX | e) (Promise GoogleUser)
 foreign import getBasicProfile :: GoogleUser -> GoogleBasicProfile -- TODO deel kan misschien met Foreign module gedaan worden ipv met FFI
 foreign import getEmail :: GoogleBasicProfile -> Nullable String -- Nullable??
+foreign import getAuthResponse :: GoogleUser -> GoogleAuthResponse
 
 loadAuth2 :: forall e. Gapi -> Aff (ajax :: AJAX | e) LoadedGapi
 loadAuth2 gapi = makeAff $ loadAuth2Impl gapi

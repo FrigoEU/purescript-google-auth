@@ -2,13 +2,15 @@ exports.loadAuth2Impl = function(gap){
   debugger;
   return function(onerr){
     return function(onSucc){
-      try{
-        gap.load("auth2", function(){
-          onSucc(gap)();
-        });
-      } catch (e){
-        onerr(e)();
-      }
+      return function(){
+        try{
+          gap.load("auth2", function(){
+            onSucc(gap)();
+          });
+        } catch (e){
+          onerr(e)();
+        }
+      };
     };
   };
 };
@@ -25,11 +27,12 @@ exports.signInImpl = function(gauth){
     return gauth.signIn();
   };
 };
+exports.getAuthResponse = function(gu){
+  return gu.getAuthResponse();
+};
 exports.getBasicProfile = function(gu){
-  debugger;
   return gu.getBasicProfile();
 };
 exports.getEmail = function(gbp){
-  debugger;
   return gbp.getEmail();
 };

@@ -1,4 +1,7 @@
 {
+  "dependencies": {
+    "google-auth-library": "0.10.0"
+  },
   "scripts": {
     "build": "pulp build"
   }

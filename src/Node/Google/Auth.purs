@@ -1,17 +1,17 @@
 module Node.Google.Auth where
 
+import Prelude
+
 import Control.Monad.Aff (Aff, makeAff)
-import Control.Monad.Eff (Eff)
+import Control.Monad.Eff (Eff, kind Effect)
 import Control.Monad.Eff.Exception (Error)
-import Google.Auth (IdToken(..))
-import Main (ClientId(..))
-import Prelude (Unit, (>>>))
+import Google.Auth (ClientId, IdToken)
 
 
-foreign import data GOOGLEAUTH :: !
-foreign import data OAuth2 :: *
-foreign import data LoginTicket :: *
-foreign import data Payload :: *
+foreign import data GOOGLEAUTH :: Effect
+foreign import data OAuth2 :: Type
+foreign import data LoginTicket :: Type
+foreign import data Payload :: Type
 foreign import getOAuth2 :: ClientId -> OAuth2
 foreign import getPayload :: LoginTicket -> Payload
 -- TODO hoe haal je vanuit Payload emailadres?

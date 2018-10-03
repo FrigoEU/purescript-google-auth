@@ -1,5 +1,4 @@
 exports.loadAuth2Impl = function(gap){
-  debugger;
   return function(onerr){
     return function(onSucc){
       return function(){
@@ -15,7 +14,7 @@ exports.loadAuth2Impl = function(gap){
   };
 };
 
-exports.init = function(gap){
+exports.initAuth = function(gap){
   return function(clientId){
     return function(){
       return gap.auth2.init({client_id: clientId});
